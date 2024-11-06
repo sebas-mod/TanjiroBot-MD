@@ -1,76 +1,35 @@
-let WAMessageStubType = (await import('@whiskeysockets/baileys')).default
+// Creditos del codigo a @usxr_angelito //
+/* GitHub: https://github.com/karim-off */
+/* Bot: https://github.com/Karim-off/xiabot-pro */
+import {WAMessageStubType} from '@whiskeysockets/baileys';
+import fetch from 'node-fetch';
 
-export async function before(m, { conn, participants, groupMetadata }) {
+export async function before(m, { conn, participants}) {
 if (!m.messageStubType || !m.isGroup) return
-const fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net"}  
-let chat = global.db.data.chats[m.chat]
+  const groupName = (await conn.groupMetadata(m.chat)).subject;
 let usuario = `@${m.sender.split`@`[0]}`
-let pp = await conn.profilePictureUrl(m.chat, 'image').catch(_ => null) || 'https://qu.ax/QGAVS.jpg'  
-
-let nombre, foto, edit, newlink, status, admingp, noadmingp
-nombre = `*${usuario}*\n✨️ Ha cambiado el nombre del grupo\n\n🌻 Ahora el grupo se llama:\n*${m.messageStubParameters[0]}*`
-foto = `*${usuario}*\n🚩 Ha cambiado la imagen del grupo`
-edit = `*${usuario}*\n🌺 Ha permitido que ${m.messageStubParameters[0] == 'on' ? 'solo admins' : 'todos'} puedan configurar el grupo`
-newlink = `🌸 El enlace del grupo ha sido restablecido por:\n*» ${usuario}*`
-status = `El grupo ha sido ${m.messageStubParameters[0] == 'on' ? '*cerrado 🔒*' : '*abierto 🔓*'} Por *${usuario}*\n\n💬 Ahora ${m.messageStubParameters[0] == 'on' ? '*solo admins*' : '*todos*'} pueden enviar mensaje`
-admingp = `*@${m.messageStubParameters[0].split`@`[0]}* Ahora es admin del grupo 🥳\n\n💫 Acción hecha por:\n*» ${usuario}*`
-noadmingp =  `*@${m.messageStubParameters[0].split`@`[0]}* Deja de ser admin del grupo 😿\n\n💫 Acción hecha por:\n*» ${usuario}*`
-
-if (chat.detect && m.messageStubType == 21) {
-await conn.sendMessage(m.chat, { text: nombre, mentions: [m.sender] }, { quoted: fkontak })   
-
-} else if (chat.detect && m.messageStubType == 22) {
-await conn.sendMessage(m.chat, { image: { url: pp }, caption: foto, mentions: [m.sender] }, { quoted: fkontak })
-
-} else if (chat.detect && m.messageStubType == 23) {
-await conn.sendMessage(m.chat, { text: newlink, mentions: [m.sender] }, { quoted: fkontak })    
-
-} else if (chat.detect && m.messageStubType == 25) {
-await conn.sendMessage(m.chat, { text: edit, mentions: [m.sender] }, { quoted: fkontak })  
-
-} else if (chat.detect && m.messageStubType == 26) {
-await conn.sendMessage(m.chat, { text: status, mentions: [m.sender] }, { quoted: fkontak })  
-
-} else if (chat.detect && m.messageStubType == 29) {
-await conn.sendMessage(m.chat, { text: admingp, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`] }, { quoted: fkontak })  
-
-} else if (chat.detect && m.messageStubType === 172 && m.messageStubParameters.length > 0) {
-const rawUser = m.messageStubParameters[0];
-const users = rawUser.split('@')[0]; 
-const prefijosProhibidos = ['91', '92', '222', '93', '265', '61', '62', '966', '229', '40', '49', '20', '963', '967', '234', '210', '212'];
-const usersConPrefijo = users.startsWith('+') ? users : `+${users}`;
-
-if (chat.antifake) {
-if (prefijosProhibidos.some(prefijo => usersConPrefijo.startsWith(prefijo))) {
-try {
-await conn.groupRequestParticipantsUpdate(m.chat, [rawUser], 'reject');
-await conn.sendMessage(m.chat, { text: `😿 La solicitúd de ingreso de: @${users} fué rechazada automáticamente por tener un prefijo prohibido.`, mentions: [m.sender] }, { quoted: fkontak });
-
-} catch (error) {
-console.error(`❌️ Error al rechazar la solicitud de ${usersConPrefijo}:`, error);
-}} else {
-try {
-await conn.groupRequestParticipantsUpdate(m.chat, [rawUser], 'approve');
-await conn.sendMessage(m.chat, { text: `🥳 La solicitud de ingreso de: @${users} fué aprobada automáticamente.`, mentions: [m.sender] }, { quoted: fkontak });  
-} catch (error) {
-console.error(`❌️ Error al aprobar la solicitud de ${usersConPrefijo}:`, error);
-}}} else {
-try {
-await conn.groupRequestParticipantsUpdate(m.chat, [rawUser], 'approve');
-await conn.sendMessage(m.chat, { text: `🥳 La solicitud de ingreso de: @${users} fué aprobada automáticamente ya que #antifake está desactivado.`, mentions: [m.sender] }, { quoted: fkontak });
-} catch (error) {
-console.error(`❌️ Error al aprobar la solicitud de ${usersConPrefijo}:`, error);
-}}
-return;
-} if (chat.detect && m.messageStubType == 30) {
-await conn.sendMessage(m.chat, { text: noadmingp, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`] }, { quoted: fkontak })  
-
-//} else if (chat.detect && m.messageStubType == 145) {
-//await conn.sendMessage(m.chat, { text: '😿 Se ha activado el modo de aprobación para unirse al grupo.', mentions: [m.sender] })
-
+let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
+let users = participants.map(u => conn.decodeJid(u.id))
+if (m.messageStubType == 21) {
+await this.sendMessage(m.chat, { text: `⋆⃟ۣۜ᭪➣𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿  \n\n *${usuario}*\n☪ 𝐂𝐀𝐌𝐁𝐈𝐎 𝐄𝐋 𝐍𝐎𝐌𝐁𝐑𝐄:\n\n» *${m.messageStubParameters[0]}*`, mentions: [m.sender], mentions: (await conn.groupMetadata(m.chat)).participants.map(v => v.id) }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
+} else if (m.messageStubType == 22) {
+await this.sendMessage(m.chat, { text: `⋆⃟ۣۜ᭪➣𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿 \n\n *${usuario}* \n☪ 𝐂𝐀𝐌𝐁𝐈𝐎 𝐋𝐀 𝐅𝐎𝐓𝐎`, mentions: [m.sender] }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100}) 
+} else if (m.messageStubType == 24) {
+await this.sendMessage(m.chat, { text: `⋆⃟ۣۜ᭪➣𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿 \n\n *${usuario}*\n☪ 𝐂𝐀𝐌𝐁𝐈𝐎 𝐋𝐀 𝐃𝐄𝐒𝐂𝐑𝐈𝐏𝐂𝐈𝐎𝐍:\n\n${m.messageStubParameters[0]}`, mentions: [m.sender] }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} else if (m.messageStubType == 25) {
+await this.sendMessage(m.chat, { text: `🔒 𝗔𝗛𝗢𝗥𝗔 *${m.messageStubParameters[0] == 'on' ? '𝗦𝗢𝗟𝗢 𝗔𝗗𝗠𝗜𝗡𝗦' : '𝗧𝗢𝗗𝗢𝗦'}* 𝗣𝗨𝗘𝗗𝗘𝗡 𝗘𝗗𝗜𝗧𝗔𝗥 𝗟𝗔 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗖𝗜𝗢𝗡 𝗗𝗘𝗟 𝗚𝗥𝗨𝗣𝗢`, mentions: [m.sender] }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} else if (m.messageStubType == 26) {
+await this.sendMessage(m.chat, { text: `⋆⃟ۣۜ᭪➣𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿 \n\n» 𝗘𝗟 𝗚𝗥𝗨𝗣𝗢 𝗘𝗦𝗧𝗔 ${m.messageStubParameters[0] == 'on' ? '𝗖𝗘𝗥𝗥𝗔𝗗𝗢 ' : '𝗔𝗕𝗜𝗘𝗥𝗧𝗢 '}\n ${m.messageStubParameters[0] == 'on' ? '𝗦𝗢𝗟𝗢 𝗔𝗗𝗠𝗜𝗡𝗦 𝗣𝗨𝗘𝗗𝗘𝗡 𝗘𝗦𝗖𝗥𝗜𝗕𝗜𝗥' : '𝗬𝗔 𝗣𝗨𝗘𝗗𝗘𝗡 𝗘𝗦𝗖𝗥𝗜𝗕𝗜𝗥 𝗧𝗢𝗗𝗢𝗦'} 𝗘𝗡 𝗘𝗦𝗧𝗘 𝗚𝗥𝗨𝗣𝗢`, mentions: [m.sender] }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} else if (m.messageStubType == 29) {
+await this.sendMessage(m.chat, { text: `⋆⃟ۣۜ᭪➣𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿 \n\n *@${m.messageStubParameters[0].split`@`[0]}*\n » 𝗔𝗛𝗢𝗥𝗔 𝗘𝗦 𝗔𝗗𝗠𝗜𝗡.:\n\n» 𝗗𝗘: ${groupName}\n\n» 𝗔𝗖𝗖𝗜𝗢𝗡 𝗥𝗘𝗔𝗟𝗜𝗭𝗔 𝗣𝗢𝗥:\n *${usuario}*`, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`], mentions: (await conn.groupMetadata(m.chat)).participants.map(v => v.id) }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} else if (m.messageStubType == 30) {
+await this.sendMessage(m.chat, { text: `⋆⃟ۣۜ᭪➣𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿 \n\n *@${m.messageStubParameters[0].split`@`[0]}*\n » 𝗗𝗘𝗝𝗔 𝗗𝗘 𝗦𝗘𝗥 𝗔𝗗𝗠𝗜𝗡 𝗗𝗘:\n\n» 𝗚𝗥𝗨𝗣𝗢: ${groupName}\n\n» 𝗔𝗖𝗖𝗜𝗢𝗡 𝗥𝗘𝗔𝗟𝗜𝗭𝗔 𝗣𝗢𝗥:\n *${usuario}*`, mentions: [`${m.sender}`,`${m.messageStubParameters[0]}`], mentions: (await conn.groupMetadata(m.chat)).participants.map(v => v.id) }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} else if (m.messageStubType == 72) {
+await this.sendMessage(m.chat, { text: `${usuario} 𝗖𝗔𝗠𝗕𝗜𝗢 𝗟𝗔 𝗗𝗨𝗥𝗔𝗖𝗜𝗢𝗡 𝗗𝗘 𝗟𝗢𝗦 𝗠𝗘𝗡𝗦𝗔𝗝𝗘𝗦 𝗧𝗘𝗠𝗣𝗢𝗥𝗔𝗟𝗘𝗦 𝗔: *@${m.messageStubParameters[0]}*`, mentions: [m.sender] }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
+} else if (m.messageStubType == 123) {
+await this.sendMessage(m.chat, { text: `${usuario} 𝗗𝗘𝗦𝗔𝗖𝗧𝗜𝗩𝗢 𝗟𝗢𝗦 𝗠𝗘𝗡𝗦𝗔𝗝𝗘𝗦 𝗧𝗘𝗠𝗣𝗢𝗥𝗔𝗟𝗘𝗦.`, mentions: [m.sender] }, { quoted: fkontak, ephemeralExpiration: 24*60*100, disappearingMessagesInChat: 24*60*100})
 } else {
-//console.log({ messageStubType: m.messageStubType,
-//messageStubParameters: m.messageStubParameters,
-//type: WAMessageStubType[m.messageStubType], 
-//})
-}}
+console.log({messageStubType: m.messageStubType,
+messageStubParameters: m.messageStubParameters,
+type: WAMessageStubType[m.messageStubType], 
+})}}
