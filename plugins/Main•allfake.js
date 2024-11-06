@@ -37,15 +37,14 @@ let user = global.db.data.users[who]
 let pushname = m.pushName || 'Sin nombre'
 
 //creador y otros
-global.creador = 'Wa.me/5493876432076'
+global.creador = 'Wa.me/5491140951814'
 global.ofcbot = `${conn.user.jid.split('@')[0]}`
-global.asistencia = 'https://wa.me/message/O4QPPHZOFDOJI1'
-global.namechannel = '© All Rightd Reserved • YaemoriBot'
+global.namechannel = 'TanjiroBot-MD'
 
 //ids channel
-global.channelid = '120363310433406751@newsletter'
-global.canalIdYL = ["120363160031023229@newsletter", "120363310433406751@newsletter", "120363263466636910@newsletter", "120363307382381547@newsletter", "120363301598733462@newsletter"]
-global.canalNombreYL = ["INFINITY-WA 💫", "YaemoriBot - Test 🚩", "© All Rightd Reserved • YaemoriBot", "Megumin Bot - Channel 💥", "Sky Ultra Plus ☁️"]
+global.channelid = '120363299030870235@newsletter'
+global.canalIdYL = ["120363299030870235@newsletter", "120363299030870235@newsletter", "120363299030870235@newsletter", "120363299030870235@newsletter", "120363299030870235@newsletter"]
+global.canalNombreYL = ["𝐓𝐚𝐧𝐣𝐢𝐫𝐨𝐁𝐨𝐭-𝐌𝐃", "𝐓𝐚𝐧𝐣𝐢𝐫𝐨𝐁𝐨𝐭-𝐌𝐃", "𝐓𝐚𝐧𝐣𝐢𝐫𝐨𝐁𝐨𝐭-𝐌𝐃", "𝐓𝐚𝐧𝐣𝐢𝐫𝐨𝐁𝐨𝐭-𝐌𝐃", "𝐓𝐚𝐧𝐣𝐢𝐫𝐨𝐁𝐨𝐭-𝐌𝐃"]
 global.channelRD = await getRandomChannel()
 
 //fechas
@@ -76,21 +75,11 @@ global.waittt = '🚀 Cargando...'
 global.waitttt = '🚀 Cargando...'
 
 //Enlaces
-var canal = 'https://whatsapp.com/channel/0029VaQD7LAJP216tu9liI2A'
-var canal2 = 'https://whatsapp.com/channel/0029Vam7yUg77qVaz3sIAp0z'
-var canal3 = 'https://whatsapp.com/channel/0029Va4QjH7DeON0ePwzjS1A'
-var canal4 = 'https://whatsapp.com/channel/0029VakUvreFHWpyWUr4Jr0g'
-var git = 'https://github.com/Dev-Diego' 
-var youtube = 'https://www.youtube.com/@OfcDiego' 
-var github = 'https://github.com/Dev-Diego/YaemoriBot-MD'  
-var dash = 'https://dash.skyultraplus.com'
-var panel = 'https://panel.skyultraplus.com'
-var status = 'https://estado.skyultraplus.com'
-var discord = 'https://discord.gg/zvKgtc2RBc'
-let tiktok = 'https://tiktok.com/@dev_diego'
-let correo = 'theyaemoribot@gmail.com'
+var canal = 'https://whatsapp.com/channel/0029VafHsEoBqbr3qlW1aX0U'  
+var git = 'https://github.com/sebas-mod' 
+var github = 'https://github.com/sebas-mod/Tanjiro-bot'
 
-global.redes = [canal, canal2, canal3, canal4, git, youtube, github, dash, panel, status, discord, tiktok, correo].getRandom()
+global.redes = [canal, git, github,].getRandom()
 
 global.redeshost = [canal4, dash, panel, status, discord].getRandom()
 
@@ -123,9 +112,11 @@ global.fake = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo
 }}, { quoted: m }
 
 global.icono = [ 
-'https://qu.ax/uuYfC.jpg',
-'https://qu.ax/fprhC.jpg',
-'https://qu.ax/YHLEj.jpg'
+'https://qu.ax/ySOk.jpg',
+'https://qu.ax/jhHZ.jpg',
+'https://qu.ax/oid.jpg',
+'https://qu.ax/jhQQ.jpeg',
+'https://qu.ax/hWZM.jpeg
 ].getRandom()
 
 global.rcanal = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, serverMessageId: 100, newsletterName: channelRD.name, }, externalAdReply: { showAdAttribution: true, title: namebot, body: dev, mediaUrl: null, description: null, previewType: "PHOTO", thumbnailUrl: icono, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false }, }, }}
