@@ -75,6 +75,6 @@ handler.command = ['n', 'notify']
 
 handler.group = true
 handler.admin = true
-handler.register = true
+handler.register = false
 
 export default handler
