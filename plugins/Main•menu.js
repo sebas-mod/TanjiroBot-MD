@@ -31,28 +31,29 @@ let tags = {
 
 const defaultMenu = {
   before: `*˚₊·˚₊· ͟͟͞͞➳❥ %taguser*
-*˚₊·˚₊· ͟͟͞͞➳❥* 𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿✨
+*˚₊·˚₊· ͟͟͞͞➳❥* 𝙔𝙖𝙚𝙢𝙤𝙧𝙞𝘽𝙤𝙩-𝙈𝘿 🌻✨
 
 ╔═══════⩽✰⩾═══════╗
-║	𝐈 𝐍 𝐅 𝐎 - 𝐔 𝐒 𝐄 𝐑
+║                        𝐈 𝐍 𝐅 𝐎 - 𝐔 𝐒 𝐄 𝐑
 ╚═══════⩽✰⩾═══════╝ 
-*˚ ͟͟͞͞➳❥ Cliente » %name
-*˚ ͟͟͞͞➳❥ Exp » %exp
-*˚ ͟͟͞͞➳❥ Pais » %pais
-*˚ ͟͟͞͞➳❥ Nivel » %level
-*˚ ͟͟͞͞➳❥ Rango » %role
+*˚ ͟͟͞͞➳❥ Cliente » \`\`\`%name\`\`\`
+*˚ ͟͟͞͞➳❥ Exp » \`\`\`%exp\`\`\`
+*˚ ͟͟͞͞➳❥ Pais » \`\`\`%pais\`\`\`
+*˚ ͟͟͞͞➳❥ Galletas » \`\`\`%cookies\`\`\`
+*˚ ͟͟͞͞➳❥ Nivel » \`\`\`%level\`\`\`
+*˚ ͟͟͞͞➳❥ Rango » \`\`\`%role\`\`\`
 
 ╔═══════⩽✰⩾═══════╗
-║	𝐈 𝐍 𝐅 𝐎 - 𝐁 𝐎 𝐓
+║                        𝐈 𝐍 𝐅 𝐎 - 𝐁 𝐎 𝐓
 ╚═══════⩽✰⩾═══════╝ 
-*˚ ͟͟͞͞➳❥ Made by » 𝐒𝐞𝐛𝐚𝐬-𝐌𝐃
-*˚ ͟͟͞͞➳❥ Bot » %botofc
-*˚ ͟͟͞͞➳❥ Fecha » %fecha
-*˚ ͟͟͞͞➳❥ Actividad » %muptime
-*˚ ͟͟͞͞➳❥ Usuarios » %totalreg
+*˚ ͟͟͞͞➳❥ Made by » \`\`\`@DevDiego\`\`\`
+*˚ ͟͟͞͞➳❥ Bot » \`\`\`%botofc\`\`\`
+*˚ ͟͟͞͞➳❥ Fecha » \`\`\`%fecha\`\`\`
+*˚ ͟͟͞͞➳❥ Actividad » \`\`\`%muptime\`\`\`
+*˚ ͟͟͞͞➳❥ Usuarios » \`\`\`%totalreg\`\`\`
 `.trimStart(),
-    header: '╔═══════⩽✰⩾═══════╗\n║			%category\n╠═══════⩽✰⩾═══════╝\n║╭──────────────┄',
-  body: '║│⋆⃟ۣۜ᭪➣%cmd',
+    header: '╔═══════⩽✰⩾═══════╗\n║                        %category\n╠═══════⩽✰⩾═══════╝\n║╭──────────────┄',
+  body: '║│˙˚·͟͟͟͟͟͞͞͞͞✰ %cmd',
   footer: '║╰──────────────┄\n╚═══════⩽✰⩾═══════╝\n',
   after: `> ${dev}`,
 }
@@ -167,21 +168,21 @@ const gif = await response.buffer()
 
 //await conn.reply(m.chat, '*Próximamente se remitirá el menú.*', fkontak, { contextInfo:{ forwardingScore: 2022, isForwarded: true, externalAdReply: {title: packname, body: dev, sourceUrl: redeshost, thumbnail: await (await fetch(fotoperfil)).buffer() }}})
 
-await m.react('🥷🏻') 
+await m.react('🌻') 
 
-await conn.sendMessage(m.chat, { video: { url: vid }, caption: text.trim(), contextInfo: { mentionedJid: [m.sender], isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363299030870235@newsletter', newsletterName: '𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿 - ᥴһᥲᥒᥒᥱᥣ 🌱', serverMessageId: -1, }, forwardingScore: 999, externalAdReply: { title: '𝙏𝙖𝙣𝙟𝙞𝙧𝙤𝘽𝙤𝙩-𝙈𝘿✨', body: dev, thumbnailUrl: 'https://pomf2.lain.la/f/gsejom4f.mp4', sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false,
+await conn.sendMessage(m.chat, { video: { url: vid }, caption: text.trim(), contextInfo: { mentionedJid: [m.sender], isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: channelRD.id, newsletterName: channelRD.name, serverMessageId: -1, }, forwardingScore: 999, externalAdReply: { title: '𝙔𝙖𝙚𝙢𝙤𝙧𝙞𝘽𝙤𝙩-𝙈𝘿 🌻✨', body: dev, thumbnailUrl: fotoperfil, sourceUrl: redes, mediaType: 1, renderLargerThumbnail: false,
 }, }, gifPlayback: true, gifAttribution: 0 }, { quoted: fkontak })
 
   } catch (e) {
     await m.react(error)
-    conn.reply(m.chat, `「✘」 *Ocurrió un error al enviar el menú*\n\n${e}`, m, fake, )
+    conn.reply(m.chat, `✘ Ocurrió un error al enviar el menú principal.\n\n${e}`, m, fake)
     throw e
   }
 }
 handler.help = ['allmenu']
 handler.tags = ['main']
-handler.command = ['menuall', 'menu', 'allmenu', 'menucompleto'] 
-handler.register = true
+handler.command = ['menu', 'help', 'menú', 'menuall', 'menúall', 'allmenú', 'allmenu', 'menucompleto'] 
+handler.register = false
 
 export default handler
 
